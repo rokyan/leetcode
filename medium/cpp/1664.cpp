@@ -7,24 +7,18 @@ public:
     {
         const auto n = std::size(nums);
         
-        std::vector<int> suff_even(n);
-        std::vector<int> suff_odd(n);
+        auto suff_even = 0;
+        auto suff_odd = 0;
         
-        for (int i = n - 1; i >= 0; i--)
-        {
-            if (i + 1 < n)
-            {
-                suff_even[i] = suff_even[i + 1];
-                suff_odd[i] = suff_odd[i + 1];
-            }
-            
+        for (auto i = 0; i < n; i++)
+        {           
             if (i % 2 == 0)
             {
-                suff_even[i] += nums[i];
+                suff_even += nums[i];
             }
             else
             {
-                suff_odd[i] += nums[i];
+                suff_odd += nums[i];
             }
         }
          
@@ -35,8 +29,17 @@ public:
         
         for (auto i = 0; i < n; i++)
         {
-            const auto even_sum = pref_even + (i + 1 < n ? suff_odd[i + 1] : 0);
-            const auto odd_sum = pref_odd + (i + 1 < n ? suff_even[i + 1] : 0);
+            if (i % 2 == 0)
+            {
+                suff_even -= nums[i];
+            }
+            else
+            {
+                suff_odd -= nums[i];
+            }
+            
+            const auto even_sum = pref_even + suff_odd;
+            const auto odd_sum = pref_odd + suff_even;
             
             ways += even_sum == odd_sum;
             

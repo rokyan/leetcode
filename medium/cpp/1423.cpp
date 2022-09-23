@@ -3,7 +3,7 @@
 class Solution
 {
 public:
-    int maxScore(vector<int>& cardPoints, int k)
+    int maxScore(std::vector<int>& cardPoints, int k)
     {
         const auto n = std::size(cardPoints);
         

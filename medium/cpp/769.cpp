@@ -5,14 +5,21 @@ class Solution
 public:
     int maxChunksToSorted(std::vector<int>& arr)
     {
-        int ans = 0;
-        int max_val = 0;
+        const auto n = std::size(arr);
         
-        for (int i = 0; i < std::size(arr); i++)
+        std::vector<int> max_on_pref(n);
+        max_on_pref[0] = arr[0];
+        
+        for (std::size_t i = 1; i < n; i++)
         {
-            max_val = std::max(max_val, arr[i]);
-            
-            if (i == max_val)
+            max_on_pref[i] = std::max(max_on_pref[i - 1], arr[i]);
+        }
+        
+        auto ans = 0;
+        
+        for (std::size_t i = 0; i < n; i++)
+        {
+            if (max_on_pref[i] == i)
             {
                 ans++;
             }

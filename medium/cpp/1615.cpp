@@ -1,16 +1,11 @@
-// https://leetcode.com/problems/maximal-network-rank/
+// https://leetcode.com/problems/maximal-network-rank/submissions/
 
 class Solution
 {
 public:
-    int maximalNetworkRank(int n, vector<vector<int>>& roads)
+    int maximalNetworkRank(int n, std::vector<std::vector<int>>& roads)
     {
-        std::vector<std::vector<bool>> is_conn(n);
-        
-        for (auto& e : is_conn)
-        {
-            e.resize(n);
-        }
+        std::vector<std::vector<bool>> is_conn(n, std::vector<bool>(n));
         
         std::vector<int> count(n);
         
@@ -25,7 +20,7 @@ public:
             count[v]++;
         }
         
-        int ans = 0;
+        auto ans = 0;
         
         for (int u = 0; u + 1 < n; u++)
         {

@@ -40,6 +40,11 @@ private:
                 }
                 
                 ptr = ptr->next[c].get();
+                
+                if (ptr->is_leaf)
+                {
+                    return;
+                }
             }
             
             ptr->is_leaf = true;
@@ -86,6 +91,8 @@ public:
         }
         
         std::string res;
+        res.reserve(std::size(sentence));
+        
         std::string word;
         
         for (std::size_t pos = 0; pos < std::size(sentence); pos++)

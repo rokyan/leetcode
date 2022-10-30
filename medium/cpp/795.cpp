@@ -5,11 +5,11 @@ class Solution
 public:
     int numSubarrayBoundedMax(std::vector<int>& nums, int left, int right)
     {
-        return solve(nums, right + 1) - solve(nums, left);
+        return count(nums, right + 1) - count(nums, left);
     }
     
 private:
-    long long solve(const std::vector<int>& nums, int right)
+    long long count(const std::vector<int>& nums, int right)
     {
         const int n = std::size(nums);
         

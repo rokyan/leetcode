@@ -2,11 +2,12 @@
 
 class Solution
 {
+private:
+    static constexpr int MOD = 1000 * 1000 * 1000 + 7;
+    
 public:
     int concatenatedBinary(int n)
-    {
-        const int mod = 1000 * 1000 * 1000 + 7;
-        
+    {       
         std::vector<int> bd(20);
         
         int ans = 0;
@@ -25,7 +26,7 @@ public:
             while (m > 0)
             {
                 ans = 2 * ans + bd[--m];
-                ans %= mod;
+                ans %= MOD;
             }
         }
         

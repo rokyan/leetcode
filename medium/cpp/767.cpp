@@ -38,6 +38,7 @@ public:
             }
             
             cnt[c]--;
+            
             res.push_back(c + 'a');
         }
         

@@ -3,7 +3,7 @@
 class Solution
 {
 public:
-    int longestArithSeqLength(vector<int>& nums)
+    int longestArithSeqLength(std::vector<int>& nums)
     {
         const auto n = std::size(nums);
         

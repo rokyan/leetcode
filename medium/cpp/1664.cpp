@@ -22,8 +22,7 @@ public:
             }
         }
          
-        auto ways = 0;
-        
+        auto ways = 0;        
         auto pref_even = 0;
         auto pref_odd = 0;
         

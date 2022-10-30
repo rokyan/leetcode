@@ -14,8 +14,7 @@ public:
             graph[edge[1]].push_back(edge[0]);
         }
         
-        std::vector<int> ans(n);
-        
+        std::vector<int> ans(n);        
         std::vector<int> memo(n, -1);
         
         for (int v = 0; v < n; v++)

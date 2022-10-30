@@ -9,7 +9,7 @@ public:
         
         std::unordered_map<int, int> last_pos;
         
-        int ans = -1;
+        auto ans = -1;
         
         for (int pos = 0; pos < n; pos++)
         {

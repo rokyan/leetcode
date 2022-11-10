@@ -8,6 +8,7 @@ public:
         remap(pattern);
         
         std::vector<string> answer;
+        answer.reserve(std::size(words));
         
         for (const auto& word : words)
         {

@@ -14,7 +14,7 @@
 
 class Solution {
 public:
-    vector<TreeNode*> allPossibleFBT(int n)
+    std::vector<TreeNode*> allPossibleFBT(int n)
     {      
         std::vector<TreeNode*> dp[n + 1];
         

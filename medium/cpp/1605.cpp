@@ -10,15 +10,17 @@ public:
         
         std::vector<std::vector<int>> solution(n, std::vector<int>(m));
         
-        for (std::size_t i = 0; i < n; i++)
+        for (std::size_t i = 0, j = 0; i < n && j < m; )
         {
-            for (std::size_t j = 0; j < m; j++)
-            {
-                const auto val = std::min(rowSum[i], colSum[j]);
-                solution[i][j] = val;
-                rowSum[i] -= val;
-                colSum[j] -= val;
-            }
+            const auto val = std::min(rowSum[i], colSum[j]);
+
+            solution[i][j] = val;
+
+            rowSum[i] -= val;
+            colSum[j] -= val;
+
+            i += rowSum[i] == 0;
+            j += colSum[j] == 0;
         }
         
         return solution;

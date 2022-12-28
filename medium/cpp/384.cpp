@@ -23,7 +23,7 @@ public:
         
         for (auto i = static_cast<int>(std::size(shuffled)) - 1; i >= 0; i--)
         {
-            const auto idx = dis(gen) * (i + 1);
+            const auto idx = static_cast<std::size_t>(dis(gen) * (i + 1));
             std::swap(shuffled[i], shuffled[idx]);
         }
         

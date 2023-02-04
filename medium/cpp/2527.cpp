@@ -5,8 +5,6 @@ class Solution
 public:
     int xorBeauty(std::vector<int>& nums)
     {
-        auto n = static_cast<int>(std::size(nums));
-
         auto res = 0;
 
         for (auto bit = 0; bit < 32; bit++)

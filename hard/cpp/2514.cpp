@@ -52,19 +52,23 @@ public:
 private:
     int bin_pow(int n, int pow)
     {
-        if (pow == 1)
+        auto ret = 1;
+
+        while (pow)
         {
-            return n;
+            if (pow & 1)
+            {
+                ret = 1LL * ret * n % mod;
+                pow--;
+            }
+            else
+            {
+                n = 1LL * n * n % mod;
+                pow >>= 1;
+            }
         }
 
-        if (pow & 1)
-        {
-            return 1LL * n * bin_pow(n, pow - 1) % mod; 
-        }
-
-        const auto temp = bin_pow(n, pow >> 1);
-
-        return 1LL * temp * temp % mod;
+        return ret;
     }
 
     int count(const std::string& s, const std::vector<int>& f, const std::vector<int>& inv)

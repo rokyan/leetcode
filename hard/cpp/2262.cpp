@@ -3,7 +3,7 @@
 class Solution
 {
 public:
-    long long appealSum(string s)
+    long long appealSum(std::string s)
     {
         std::size_t last[26] = { 0 };
         

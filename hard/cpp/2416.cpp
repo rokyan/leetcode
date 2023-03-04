@@ -61,8 +61,6 @@ public:
             t.add(word);
         }
 
-        std::cout << "#" << std::endl;
-
         std::vector<int> res;
         res.reserve(std::size(words));
 

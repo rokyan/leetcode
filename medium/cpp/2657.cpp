@@ -1,4 +1,3 @@
-
 // https://leetcode.com/problems/find-the-prefix-common-array-of-two-arrays/description/
 
 class Solution

@@ -1,10 +1,10 @@
-// https://leetcode.com/problems/course-schedule-iv/
+// https://leetcode.com/problems/course-schedule-iv/description/
 
 class Solution
 {
 public:
     std::vector<bool> checkIfPrerequisite(int numCourses, std::vector<std::vector<int>>& prerequisites,
-         std::vector<std::vector<int>>& queries)
+        std::vector<std::vector<int>>& queries)
     {
         std::vector<std::vector<bool>> graph(numCourses, std::vector<bool>(numCourses));
         

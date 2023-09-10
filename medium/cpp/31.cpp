@@ -1,6 +1,6 @@
-// https://leetcode.com/problems/next-permutation/
+// https://leetcode.com/problems/next-permutation/description/
 
-class Solution
+class Solution 
 {
 public:
     void nextPermutation(std::vector<int>& nums)

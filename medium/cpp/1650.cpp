@@ -16,33 +16,35 @@ class Solution
 public:
     Node* lowestCommonAncestor(Node* p, Node * q)
     {
-        std::vector<Node*> path_p;
+        return find_lca(find_root(p), p, q);
+    }
 
-        for (auto node = p; node != nullptr; node = node->parent)
+private:
+    Node* find_root(Node* node)
+    {
+        while (node->parent != nullptr)
         {
-            path_p.push_back(node);
+            node = node->parent;
         }
 
-        std::vector<Node*> path_q;
+        return node;
+    }
 
-        for (auto node = q; node != nullptr; node = node->parent)
+    Node* find_lca(Node* root, Node* p, Node* q)
+    {
+        if (root == nullptr || root == p || root == q)
         {
-            path_q.push_back(node);
+            return root;
         }
 
-        std::reverse(std::begin(path_p), std::end(path_p));
-        std::reverse(std::begin(path_q), std::end(path_q));
+        auto left = find_lca(root->left, p, q);
+        auto right = find_lca(root->right, p, q);
 
-        auto i = 0;
-
-        for ( ; i < std::min(std::size(path_p), std::size(path_q)); i++)
+        if (left != nullptr && right != nullptr)
         {
-            if (path_p[i] != path_q[i])
-            {
-                break;
-            }
+            return root;
         }
 
-        return path_p[i - 1];
+        return left != nullptr ? left : right;
     }
 };

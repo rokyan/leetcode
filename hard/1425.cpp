@@ -7,11 +7,8 @@ public:
     {
         const auto n = std::size(nums);
 
-        std::vector<int> dp(n);
-        dp[0] = nums[0];
-
-        std::multiset<int> s;
-        s.insert(nums[0]);
+        std::priority_queue<std::pair<int, int>> pq;
+        pq.push({ nums[0], 0 });
 
         auto res = nums[0];
 
@@ -19,14 +16,19 @@ public:
         {
             if (i > k)
             {
-                s.erase(s.find(dp[i - k - 1]));
+                auto last = i - k - 1;
+
+                while (pq.top().second <= last)
+                {
+                    pq.pop();
+                }
             }
 
-            dp[i] = nums[i] + (*std::rbegin(s) > 0 ? *std::rbegin(s) : 0);
+            const auto val = nums[i] + std::max(pq.top().first, 0);
 
-            s.insert(dp[i]);
+            pq.push({ val, i });
 
-            res = std::max(res, dp[i]);
+            res = std::max(res, val);
         }
 
         return res;

@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/path-with-maximum-probability/description/
+# https://leetcode.com/problems/path-with-maximum-probability/description/
 
 class Solution:
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float],

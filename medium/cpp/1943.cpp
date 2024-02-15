@@ -14,25 +14,19 @@ public:
         }
 
         auto last = -1;
-        auto s = 0LL;
         auto acc = 0LL;
 
         std::vector<std::vector<long long>> res;
 
         for (const auto& entry : m)
         {
-            acc += entry.second;
-
-            if (s > 0)
+            if (acc > 0)
             {
-                std::vector<long long> cur;
-                cur.push_back(last);
-                cur.push_back(entry.first);
-                cur.push_back(s);
+                std::vector<long long> cur{ last, entry.first, acc };
                 res.push_back(std::move(cur));
             }
 
-            s = acc;
+            acc += entry.second;
             last = entry.first;
         }
 

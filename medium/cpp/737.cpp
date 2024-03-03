@@ -66,18 +66,16 @@ public:
             return false;
         }
 
-        std::map<std::string, int> compressed;
+        std::unordered_map<std::string, int> compressed;
 
         for (const auto& p : similarPairs)
         {
-            if (compressed.find(p[0]) == std::end(compressed))
+            for (auto i = 0; i < 2; i++)
             {
-                compressed.emplace(p[0], std::size(compressed));
-            }
-
-            if (compressed.find(p[1]) == std::end(compressed))
-            {
-                compressed.emplace(p[1], std::size(compressed));
+                if (compressed.find(p[i]) == std::end(compressed))
+                {
+                    compressed.emplace(p[i], std::size(compressed));
+                }
             }
         }
 
@@ -93,15 +91,18 @@ public:
             const auto& s1 = sentence1[i];
             const auto& s2 = sentence2[i];
 
-            auto same = s1 == s2;
-
-            if (!same)
+            if (s1 != s2)
             {
                 auto id1 = -1;
 
                 if (const auto it = compressed.find(s1); it != std::end(compressed))
                 {
                     id1 = it->second;
+                }
+
+                if (id1 == -1)
+                {
+                    return false;
                 }
 
                 auto id2 = -1;
@@ -111,12 +112,15 @@ public:
                     id2 = it->second;
                 }
 
-                same = id1 != -1 && id2 != -1 && dsu.same(id1, id2);
-            }
+                if (id2 == -1)
+                {
+                    return false;
+                }
 
-            if (!same)
-            {
-                return false;
+                if (!dsu.same(id1, id2))
+                {
+                    return false;
+                }
             }
         }
 

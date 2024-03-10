@@ -70,35 +70,37 @@ public:
 
         for (auto i = 0; i < n; i++)
         {
-            const auto num = nums[i];
+            auto num = nums[i];
 
-            for (auto div = 1; div * div <= num; div++)
+            for (auto div = 2; div * div <= num; div++)
             {
                 if (num % div == 0)
                 {
-                    if (div > 1)
+                    if (const auto it = idx.find(div); it != std::end(idx))
                     {
-                        if (const auto it = idx.find(div); it != std::end(idx))
-                        {
-                            dsu.merge(it->second, i);
-                        }
-                        else
-                        {
-                            idx.emplace(div, i);
-                        }
+                        dsu.merge(it->second, i);
+                    }
+                    else
+                    {
+                        idx.emplace(div, i);
                     }
 
-                    if (num / div != div)
+                    while (num % div == 0)
                     {
-                        if (const auto it = idx.find(num / div); it != std::end(idx))
-                        {
-                            dsu.merge(it->second, i);
-                        }
-                        else
-                        {
-                            idx.emplace(num / div, i);
-                        }
+                        num /= div;
                     }
+                }
+            }
+
+            if (num > 1)
+            {
+                if (const auto it = idx.find(num); it != std::end(idx))
+                {
+                    dsu.merge(it->second, i);
+                }
+                else
+                {
+                    idx.emplace(num, i);
                 }
             }
         }

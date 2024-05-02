@@ -11,8 +11,7 @@ public:
         }
 
         auto lo = 1;
-        auto hi = *std::max_element(std::cbegin(bloomDay), std::cend(bloomDay)) + 1;
-        auto found = false;
+        auto hi = *std::max_element(std::cbegin(bloomDay), std::cend(bloomDay));
 
         while (lo < hi)
         {
@@ -38,7 +37,6 @@ public:
             if (cnt == m)
             {
                 hi = mid;
-                found = true;
             }
             else
             {
@@ -46,6 +44,6 @@ public:
             }
         }
 
-        return found ? lo : -1;
+        return lo;
     }
 };

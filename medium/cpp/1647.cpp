@@ -30,10 +30,10 @@ public:
             }
             else
             {
-                while (freq[i] >= prev)
+                if (freq[i] >= prev)
                 {
-                    res++;
-                    freq[i]--;
+                    res += freq[i] - prev + 1;
+                    freq[i] = prev - 1;
                 }
                 
                 prev = freq[i];

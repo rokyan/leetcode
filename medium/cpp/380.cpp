@@ -10,17 +10,13 @@ public:
     
     bool insert(int val)
     {
-        if (const auto it = val_to_pos.find(val); it != std::end(val_to_pos))
+        if (val_to_pos.find(val) != std::end(val_to_pos))
         {
             return false;
         }
 
         vals.push_back(val);
         val_to_pos[val] = std::size(vals) - 1;
-
-        const auto pos = get_index();
-        std::swap(val_to_pos[vals[pos]], val_to_pos[val]);
-        std::swap(vals[pos], vals.back());     
 
         return true;
     }

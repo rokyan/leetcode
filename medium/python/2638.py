@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/count-the-number-of-k-free-subsets/description/
+# https://leetcode.com/problems/count-the-number-of-k-free-subsets/description/
 
 class Solution:
     def countTheNumOfKFreeSubsets(self, nums: List[int], k: int) -> int:

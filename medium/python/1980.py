@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/find-unique-binary-string/description/
+# https://leetcode.com/problems/find-unique-binary-string/description/
 
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:

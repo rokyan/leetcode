@@ -1,24 +1,23 @@
 class Solution
 {
-private:
-    using pii = std::pair<int, int>;
-
 public:
-    std::vector<int> topKFrequent(std::vector<int>& nums, int k)
+    std::vector<int> topKFrequent(const std::vector<int>& nums, int k)
     {
-        std::unordered_map<int, int> counter;
-        std::priority_queue<pii, std::vector<pii>, std::greater<pii>> pq;
+        std::unordered_map<int, int> freq;
 
-        for (auto num : nums)
+        std::for_each(std::cbegin(nums), std::end(nums), [&freq](auto num) {
+            freq[num]++;
+        });
+
+        auto comp = [&freq](auto x, auto y) {
+            return freq[x] > freq[y];
+        };
+
+        std::priority_queue<int, std::vector<int>, decltype(comp)> pq{comp};
+
+        for (auto [key, _] : freq)
         {
-            counter[num]++;
-        }
-
-        for (auto&& entry : counter)
-        {
-            const auto [value, count] = entry;
-
-            pq.push({count, value});
+            pq.push(key);
 
             if (std::size(pq) > k)
             {
@@ -31,8 +30,7 @@ public:
 
         while (!pq.empty())
         {
-            const auto [_, value] = pq.top();
-            res.push_back(value);
+            res.push_back(pq.top());
             pq.pop();
         }
 

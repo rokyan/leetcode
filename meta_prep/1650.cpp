@@ -12,37 +12,35 @@ public:
 class Solution
 {
 public:
-    Node* lowestCommonAncestor(Node* p, Node * q)
+    Node* lowestCommonAncestor(Node* p, Node* q)
     {
-        return find_lca(find_root(p), p, q);
-    }
+        std::vector<Node*> path_to_p;
 
-private:
-    Node* find_root(Node* node)
-    {
-        while (node->parent != nullptr)
+        while (p != nullptr)
         {
-            node = node->parent;
+            path_to_p.push_back(p);
+            p = p->parent;
         }
 
-        return node;
-    }
+        std::vector<Node*> path_to_q;
 
-    Node* find_lca(Node* root, Node* p, Node* q)
-    {
-        if (root == nullptr || root == p || root == q)
+        while (q != nullptr)
         {
-            return root;
+            path_to_q.push_back(q);
+            q = q->parent;
         }
 
-        auto left = find_lca(root->left, p, q);
-        auto right = find_lca(root->right, p, q);
+        std::ranges::reverse(path_to_p);
+        std::ranges::reverse(path_to_q);
 
-        if (left != nullptr && right != nullptr)
+        auto idx = 0;
+
+        while (idx < std::min(std::size(path_to_p), std::size(path_to_q)) &&
+            path_to_p[idx] == path_to_q[idx])
         {
-            return root;
+            idx++;
         }
 
-        return left != nullptr ? left : right;
+        return path_to_p[idx - 1];
     }
 };

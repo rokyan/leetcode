@@ -15,7 +15,7 @@ public:
     int diameterOfBinaryTree(TreeNode* root)
     {
         auto res = 0;
-        calc_diam(root, res);
+        static_cast<void>(calc_diam(root, res));
         return res;
     }
 
@@ -27,9 +27,15 @@ private:
             return 0;
         }
 
-        const auto left_len = calc_diam(root->left, res);
-        const auto right_len = calc_diam(root->right, res);
+        const auto left_len = root->left != nullptr
+            ? 1 + calc_diam(root->left, res)
+            : 0;
+        const auto right_len = root->right != nullptr
+            ? 1 + calc_diam(root->right, res)
+            : 0;
+
         res = std::max(res, left_len + right_len);
-        return 1 + std::max(left_len, right_len);
+
+        return std::max(left_len, right_len);
     }
 };

@@ -4,29 +4,22 @@ public:
     int maximumSwap(int num)
     {
         auto str = std::to_string(num);
+        auto res = str;
 
-        std::array<int, 10> first;
-        first.fill(-1);
+        const int n = std::size(str);
+        auto pos = n - 1;
 
-        std::string res{str};
-
-        for (auto i = 0; i < std::size(str); i++)
+        for (auto i = n - 1; i >= 0; i--)
         {
-            const auto digit = str[i] - '0';
-
-            for (auto cand = 0; cand < digit; cand++)
+            if (str[i] < str[pos])
             {
-                if (first[cand] != -1)
-                {
-                    std::swap(str[first[cand]], str[i]);
-                    res = std::max(res, str);
-                    std::swap(str[first[cand]], str[i]);
-                }
+                std::swap(str[i], str[pos]);
+                res = std::max(res, str);
+                std::swap(str[i], str[pos]);
             }
-
-            if (first[digit] == -1)
+            else if (str[i] > str[pos])
             {
-                first[digit] = i;
+                pos = i;
             }
         }
 

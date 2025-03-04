@@ -3,37 +3,47 @@ class Solution
 public:
     int calculate(const std::string& s)
     {
-        std::vector<long long> st;
         auto last_op = '+';
+        auto res = 0LL;
+        auto prev = 0LL;
         auto cur = 0LL;
 
-        auto update = [&st, &last_op, &cur]()
+        auto update = [&last_op, &res, &prev, &cur]()
         {
             if (last_op == '+' || last_op == '-')
             {
-                const auto updated = cur * (last_op == '+' ? 1 : -1);
-                st.push_back(updated);
+                if (last_op == '-')
+                {
+                    cur *= -1;
+                }
+
+                res += cur;
+                prev = cur;
             }
             else
             {
-                const auto last = st.back();
-                st.pop_back();
-                const auto updated = last_op == '*' ? last * cur : last / cur;
-                st.push_back(updated);
+                res -= prev;
+                
+                if (last_op == '*')
+                {
+                    prev *= cur;
+                }
+                else
+                {
+                    prev /= cur;
+                }
+
+                res += prev;
             }
         };
 
         for (auto c : s)
         {
-            if (c == ' ')
-            {
-
-            }
-            else if (c >= '0' && c <= '9')
+            if (c >= '0' && c <= '9')
             {
                 cur = 10 * cur + c - '0';
             }
-            else
+            else if (c != ' ')
             {
                 update();
                 cur = 0;
@@ -43,6 +53,6 @@ public:
 
         update();
 
-        return std::accumulate(std::cbegin(st), std::cend(st), 0LL);
+        return res;
     }
 };

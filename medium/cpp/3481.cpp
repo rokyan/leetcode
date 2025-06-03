@@ -18,8 +18,6 @@ private:
         std::string res;
         res.reserve(std::size(sw));
 
-        std::cout << sw << std::endl;
-
         for (auto i = 0; i < std::size(sw); i++)
         {
             if (sw[i] == '%')

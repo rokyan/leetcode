@@ -1,0 +1,53 @@
+// https://leetcode.com/problems/design-bounded-blocking-queue/description/
+
+class BoundedBlockingQueue
+{
+public:
+    BoundedBlockingQueue(int capacity)
+        : capacity{capacity}
+    {   
+    }
+
+    BoundedBlockingQueue(const BoundedBlockingQueue&) = delete;
+    BoundedBlockingQueue& operator=(const BoundedBlockingQueue&) = delete;
+    
+    void enqueue(int element)
+    {
+        {
+            std::unique_lock lock(dataMutex);
+            notFull.wait(lock, [this]() { return std::size(data) < capacity; });
+            data.push(element);
+        }
+
+        notEmpty.notify_one();
+    }
+    
+    int dequeue()
+    {
+        int ret = 0;
+    
+        {
+            std::unique_lock lock(dataMutex);
+            notEmpty.wait(lock, [this]() { return !data.empty(); });
+            ret = data.front();
+            data.pop();
+        }
+
+        notFull.notify_one();
+
+        return ret;
+    }
+    
+    int size()
+    {
+        std::lock_guard lock(dataMutex);
+        return std::size(data);
+    }
+
+private:
+    std::queue<int> data;
+    int capacity;
+    std::mutex dataMutex;
+    std::condition_variable notEmpty;
+    std::condition_variable notFull;
+};

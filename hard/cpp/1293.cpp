@@ -1,5 +1,3 @@
-// https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/description/
-
 class Solution
 {
 public:
@@ -23,6 +21,11 @@ public:
             const auto [r, c, rem] = q.front();
             q.pop();
 
+            if (r == n - 1 && c == m - 1)
+            {
+                return distance[r][c][rem];
+            }
+
             for (auto d = 0; d < 4; d++)
             {
                 const auto nr = r + dr[d];
@@ -45,17 +48,6 @@ public:
             }
         }
 
-        int res = -1;
-
-        for (int d = 0; d <= k; d++)
-        {
-            if (distance[n - 1][m - 1][d] != -1 &&
-                (res == -1 || res > distance[n - 1][m - 1][d]))
-            {
-                res = distance[n - 1][m - 1][d];
-            }
-        }
-
-        return res;
+        return -1;
     }
 };

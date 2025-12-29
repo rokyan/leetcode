@@ -3,7 +3,7 @@
 class Solution
 {
 private:
-    static constexpr int mod = 1000'000'007;
+    static constexpr int mod = 1000'000'000 + 7;
 
 public:
     int sumOfBlocks(int n)

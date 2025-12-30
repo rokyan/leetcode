@@ -6,7 +6,6 @@ public:
     long long lastInteger(long long n)
     {
         long long head = 1;
-        long long tail = n;
         long long step = 1;
         bool from_left = true;
 
